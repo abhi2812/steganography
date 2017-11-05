@@ -65,7 +65,7 @@ def hide(secret_data):
             break
         if secret_data[i]=='0':
             hidden+=secret_data[i]
-            i++
+            i+=1
             hidden+=secret_data[i]
         else:
             hide_in_image(secret_data[i])
