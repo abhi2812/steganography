@@ -10,21 +10,7 @@ right=1
 left=0
 diag_down=0
 diag_up=0
-def hide_in_image(data):
-    global secret_data
-    if len(data)==1:
-        x,y=find_next()
-        secret_data+='1'
-    else
-        if data[1]=='0':
-            x,y=find_next()
-            pixel[x][y]-=1
-            secret_data+='0'
-        else:
-            x,y=find_next()
-            pixel[x][y]+=1
-            secret_data+='0'
-def find_next()
+def find_next():
     #check for boundaries
     global global_x
     global global_y
@@ -57,17 +43,38 @@ def find_next()
     global_x=x
     global_y=y
     return x,y
+def hide_in_image(data):
+    global secret_data
+    if len(data)==1:
+        x,y=find_next()
+        secret_data+='1'
+    else:
+        if data[1]=='0':
+            x,y=find_next()
+            pixel[x][y]-=1
+            secret_data+='0'
+        else:
+            x,y=find_next()
+            pixel[x][y]+=1
+            secret_data+='0'
+
 def hide(secret_data):
     i=0
-    while i<len(secret_data):
+    global c_pos_chart
+    b=len(c_pos_chart)
+    data=""
+    tot_len=len(secret_data)+b
+    while i<len(secret_data) and i<tot_len:
         if i==(len-1):
-            hidden+=secret_data[i]
+            data+=secret_data[i]
+            hide_in_image(data)
             break
         if secret_data[i]=='0':
-            hidden+=secret_data[i]
+            data+=secret_data[i]
             i+=1
-            hidden+=secret_data[i]
+            data+=secret_data[i]
+            hide_in_image(data)
         else:
-            hide_in_image(secret_data[i])
+            hide_in_image(data)
         i+=1
     return hidden
